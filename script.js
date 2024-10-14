@@ -260,7 +260,7 @@ snake.initBody();
 const snakeP1 = new Snake({x:165,y:40},11,"#FEBA39",1.5,8,12,ctx2);
 snakeP1.initBody();
 snakeP1.drawCharacter();
-const snakeP2 = new Snake({x:165,y:40},11,"#88FC03",1.5,24,4,ctx3);
+const snakeP2 = new Snake({x:165,y:40},11,"#88FC03",1.5,8,12,ctx3);
 snakeP2.initBody();
 snakeP2.drawCharacter();
 const apple = new Apple({x:300,y:300},8,"red",ctx);
@@ -269,7 +269,7 @@ canvas2.addEventListener("click",()=>{
     init(3,12,"#FEBA39");
 });
 canvas3.addEventListener("click",()=>{
-    init(8,4,"#88FC03");
+    init(3,12,"#88FC03");
 });
 function init(length,pathLength,color){
     snake.body.length = 0;
