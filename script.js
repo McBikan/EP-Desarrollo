@@ -84,7 +84,7 @@ class SnakeBody{
             this.radio,this.color);
     }
 }
-class Snake{
+class Snake {
     constructor(position,radio,color,velocity,length,pathLength,context){
         this.position = position;
         this.radio = radio;
@@ -109,27 +109,26 @@ class Snake{
             let path = [];
             for(let k=0; k<this.pathLength; k++){
                 path.push({
-                    x:this.position.x,
-                    y:this.position.y
+                    x: this.position.x,
+                    y: this.position.y
                 });
             }
-            this.body.push(new SnakeBody(this.radio,this.color,this.context,path)); 
+            this.body.push(new SnakeBody(this.radio,this.color,this.context,path));
         }
     }
     createBody(){
         let path = [];
         for(let k=0; k<this.pathLength; k++){
             path.push({
-                x:this.body.slice(-1)[0].path.slice(-1)[0].x,
-                y:this.body.slice(-1)[0].path.slice(-1)[0].y
+                x: this.body.slice(-1)[0].path.slice(-1)[0].x,
+                y: this.body.slice(-1)[0].path.slice(-1)[0].y
             });
         }
-        this.body.push(new SnakeBody(this.radio,this.color,this.context,path)); 
-
+        this.body.push(new SnakeBody(this.radio,this.color,this.context,path));
         if(this.pathLength < 8){
             this.body.push(new SnakeBody(this.radio,this.color,this.context,[...path]));
             this.body.push(new SnakeBody(this.radio,this.color,this.context,[...path]));
-            this.body.push(new SnakeBody(this.radio,this.color,this.context,[...path])); 
+            this.body.push(new SnakeBody(this.radio,this.color,this.context,[...path]));
         }
     }
     drawCircle(x,y,radio,color,shadowColor){
@@ -146,23 +145,19 @@ class Snake{
     }
     drawHead(){
         this.drawCircle(this.position.x,this.position.y,this.radio,this.color,this.color);
-        
         this.drawCircle(this.position.x,this.position.y-9,this.radio-4,"white","transparent");
         this.drawCircle(this.position.x+1,this.position.y-9,this.radio-6,"black","transparent");
         this.drawCircle(this.position.x+3,this.position.y-8,this.radio-9,"white","transparent");
-
         this.drawCircle(this.position.x,this.position.y+9,this.radio-4,"white","transparent");
         this.drawCircle(this.position.x+1,this.position.y+9,this.radio-6,"black","transparent");
         this.drawCircle(this.position.x+3,this.position.y+8,this.radio-9,"white","transparent");
-
     }
     drawBody(){
         this.body[0].path.unshift({
-            x:this.position.x,
-            y:this.position.y
+            x: this.position.x,
+            y: this.position.y
         });
         this.body[0].draw();
-
         for(let i = 1; i<this.body.length; i++){
             this.body[i].path.unshift(this.body[i-1].path.pop());
             this.body[i].draw();
@@ -171,12 +166,10 @@ class Snake{
     }
     draw(){
         this.context.save();
-
         this.context.translate(this.position.x,this.position.y);
         this.context.rotate(this.rotation);
         this.context.translate( -this.position.x, -this.position.y);
         this.drawHead();
-
         this.context.restore();
     }
     update(){
@@ -188,7 +181,6 @@ class Snake{
                 return;
             }
         }
-
         this.drawBody();
         this.draw();
         if(this.keys.A && this.keys.enable ){
@@ -199,16 +191,27 @@ class Snake{
         }
         this.position.x += Math.cos(this.rotation)*this.velocity;
         this.position.y += Math.sin(this.rotation)*this.velocity;
-
         this.collision();
     }
     collision(){
+        // Colisión con las paredes
         if(this.position.x-this.radio <= 0 ||
             this.position.x+this.radio >= canvas.width ||
             this.position.y-this.radio <= 0 ||
             this.position.y+this.radio >= canvas.height){
-
             this.death();
+        }
+
+        // Colisión con el propio cuerpo
+        for(let i = 4; i < this.body.length; i++){
+            let segment = this.body[i];
+            let distance = Math.sqrt(
+                (this.position.x - segment.path[0].x) ** 2 +
+                (this.position.y - segment.path[0].y) ** 2
+            );
+            if (distance < this.radio + segment.radio) {
+                this.death();
+            }
         }
     }
     death(){
@@ -217,7 +220,7 @@ class Snake{
         this.isDeath = true;
         this.body.forEach((b)=>{
             let lastItem = b.path[b.path.length-1];
-            for(let i = 0;i < b.path.length; i++){
+            for(let i = 0; i < b.path.length; i++){
                 b.path[i] = lastItem;
             }
             b.transparency = this.transparency;
@@ -251,6 +254,7 @@ class Snake{
         });
     }
 }
+
 const snake = new Snake({x:200,y:200},11,"#FEBA39",1.5,3,12,ctx);
 snake.initBody();
 const snakeP1 = new Snake({x:165,y:40},11,"#FEBA39",1.5,8,12,ctx2);
