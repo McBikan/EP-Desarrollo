@@ -24,12 +24,22 @@ body{
     border: 10px solid rgb(2, 39, 68);
     box-shadow: 0 0 50px rgb(91, 199, 223);
 }
+
 .container .score{
     position: absolute;
     top: 0;
     left: 12px;
     font-size: 40px;
 }
+
+.container .time{
+    position: absolute;
+    top: 0;
+    right: 12px;
+    font-size: 40px;
+}
+
+
 .container .menu{
     border: 2px solid rgb(1, 255, 242);
     background-color: rgb(0, 0, 0,0.5);

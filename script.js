@@ -5,6 +5,8 @@ const backgroundMusic = document.getElementById("background-music"); //musica
 
 const menu = document.querySelector(".menu");
 const score = document.querySelector(".score");
+const timeDisplay = document.querySelector(".time");
+
 const canvas2 = document.getElementById("snake-1");
 const canvas3 = document.getElementById("snake-2");
 
@@ -19,7 +21,10 @@ canvas.width = 650;
 canvas.height = 380;
 
 let play = false;
-let scoreP = 0;
+let scoreP = 0; // Inicializa el puntaje
+
+let startTime; // Variable para almacenar el tiempo de inicio
+
 
 class Apple{
     constructor(position,radio,color,context){
@@ -62,8 +67,13 @@ class Apple{
            // Cambiar el color de los pequeños rectángulos
            rectangleColor = getRandomColor(); // Función para obtener un color aleatorio o predefinido
            // Aumentar la velocidad de la serpiente
-           snake.velocity += 2;  // Incrementa la velocidad un poco cada vez que coma una manzana
+           snake.velocity += 0.2;  // Incrementa la velocidad un poco cada vez que coma una manzana
            console.log('Nuevo color de fondo:', rectangleColor); // Verificar si cambia el color
+
+           // Mostrar la poción cada vez que se han comido 5 manzanas
+           if (scoreP % 5 === 0) {
+            potionVisible = true;  // Hacer visible la poción
+            }
         }
     }
 }
@@ -306,6 +316,9 @@ class Snake {
     }
 }
 
+// Mueve la variable potionVisible fuera de la clase Potion
+let potionVisible = false;  // Ahora es una variable global
+
 class Potion {
     constructor(position, radio, color, context) {
         this.position = position;
@@ -340,7 +353,10 @@ class Potion {
             if (snake.body.length > 0) {
                 snake.body.pop(); // Elimina el último segmento de la serpiente
             }
-
+            
+            // Ocultar la poción hasta que se coman otras 5 manzanas
+            potionVisible = false;
+            
             // Cambiar posición de la poción
             this.position = {
                 x: Math.floor(Math.random() * ((canvas.width - this.radio) - this.radio + 1)) + this.radio,
@@ -348,6 +364,7 @@ class Potion {
             };
         }
     }
+
 }
 
 
@@ -371,20 +388,23 @@ canvas3.addEventListener("click",()=>{
     init(3,12,"#88FC03");
 });
 function init(length,pathLength,color){
-    snake.body.length = 0;
+    snake.body.length = 0; // Restablece el cuerpo de la serpiente
     snake.color = color;
     snake.length = length;
     snake.pathLength = pathLength;
-    snake.position = {x:200,y:200};
-    snake.isDeath = false;
-    snake.velocity = 1.5;
-    snake.transparency = 1;
+    snake.position = {x:200,y:200};  // Restablece la posición de la serpiente
+    snake.isDeath = false; // Marca que la serpiente no está muerta
+    snake.velocity = 1.5;  // Restablece la velocidad
+    snake.transparency = 1; // Restablece la transparencia
     snake.initBody();
     snake.keys.enable = true;
-    play = true;
-    menu.style.display = "none";
-    scoreP = 0;
+    play = true; // Activa el juego nuevamente
+    menu.style.display = "none"; // Oculta el menú de inicio
+    scoreP = 0; // Reinicia el puntaje
     score.textContent = scoreP;
+
+    startTime = Date.now(); // Establecer el tiempo de inicio
+
 
     backgroundMusic.play(); //Musica de fondo
 }
@@ -413,14 +433,23 @@ function background(){
     }
 }
 
-function update(){
+function update() {
     background();
-    if(play){
+    if (play) {
         snake.update();
         apple.draw();
         apple.collision(snake);
-        potion.draw(); // Dibuja la poción
-        potion.collision(snake); // Verifica la colisión con la serpiente
+
+        // Actualiza el tiempo
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo en segundos
+        document.querySelector(".time").textContent = elapsedTime; // Actualiza el tiempo en la pantalla
+
+        // Dibujar y comprobar colisión de la poción solo si es visible
+        if (potionVisible) {
+            potion.draw();
+            potion.collision(snake);
+        }
+        
     }
     requestAnimationFrame(update);
 }
