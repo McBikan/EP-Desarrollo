@@ -1,6 +1,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const backgroundMusic = document.getElementById("background-music"); //musica
+
 const menu = document.querySelector(".menu");
 const score = document.querySelector(".score");
 const canvas2 = document.getElementById("snake-1");
@@ -150,14 +152,53 @@ class Snake {
         this.context.restore();
     }
     drawHead(){
-        this.drawCircle(this.position.x,this.position.y,this.radio,this.color,this.color);
-        this.drawCircle(this.position.x,this.position.y-9,this.radio-4,"white","transparent");
-        this.drawCircle(this.position.x+1,this.position.y-9,this.radio-6,"black","transparent");
-        this.drawCircle(this.position.x+3,this.position.y-8,this.radio-9,"white","transparent");
-        this.drawCircle(this.position.x,this.position.y+9,this.radio-4,"white","transparent");
-        this.drawCircle(this.position.x+1,this.position.y+9,this.radio-6,"black","transparent");
-        this.drawCircle(this.position.x+3,this.position.y+8,this.radio-9,"white","transparent");
+        // Cabeza de la serpiente
+    this.drawCircle(this.position.x, this.position.y, this.radio, this.color, this.color);
+    
+    // Ojo izquierdo
+    this.drawCircle(this.position.x, this.position.y - 9, this.radio - 4, "white", "transparent");  // Blanco del ojo
+    this.drawCircle(this.position.x + 1, this.position.y - 9, this.radio - 6, "black", "transparent");  // Pupila negra
+    this.drawCircle(this.position.x + 3, this.position.y - 8, this.radio - 9, "white", "transparent");  // Detalle blanco
+    
+    // Ojo derecho
+    this.drawCircle(this.position.x, this.position.y + 9, this.radio - 4, "white", "transparent");  // Blanco del ojo
+    this.drawCircle(this.position.x + 1, this.position.y + 9, this.radio - 6, "black", "transparent");  // Pupila negra
+    this.drawCircle(this.position.x + 3, this.position.y + 8, this.radio - 9, "white", "transparent");  // Detalle blanco
+
+    // Fruncido de ceño (cejas)
+    this.context.save();
+    this.context.beginPath();
+    this.context.strokeStyle = "black";  // Color del fruncido
+    this.context.lineWidth = 2;  // Grosor de la línea
+
+    // Cejas inclinadas hacia abajo para mostrar molestia
+    // Cejas sobre el ojo izquierdo
+    this.context.moveTo(this.position.x - 7, this.position.y - 15); // Punto de inicio (sobre el ojo izquierdo)
+    this.context.lineTo(this.position.x - 5, this.position.y - 4);  // Punto final (ceja izquierda inclinada)
+
+    // Cejas sobre el ojo derecho
+    this.context.moveTo(this.position.x - 7, this.position.y + 15);  // Punto de inicio (sobre el ojo derecho)
+    this.context.lineTo(this.position.x - 5, this.position.y + 4); // Punto final (ceja derecha inclinada)
+
+    this.context.stroke();  // Dibuja las cejas
+    this.context.restore();
+
+    // Dibuja la lengua
+    this.context.save();
+    this.context.beginPath();
+    this.context.strokeStyle = "red"; // Color de la lengua
+    this.context.lineWidth = 4; // Grosor de la lengua
+
+    // Lengua hacia adelante
+    this.context.moveTo(this.position.x+10, this.position.y ); // Punto de inicio en la parte inferior de la cabeza
+    this.context.lineTo(this.position.x+15, this.position.y ); // Extiende la lengua hacia adelante
+
+    this.context.stroke(); // Dibuja la lengua
+    this.context.restore();    
+
+
     }
+    
     drawBody(){
         this.body[0].path.unshift({
             x: this.position.x,
@@ -231,6 +272,10 @@ class Snake {
             }
             b.transparency = this.transparency;
         });
+        
+         // Pausar la música de fondo cuando la serpiente muere
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;  // Reiniciar la música
     }
     drawCharacter(){
         for(let i= 1; i<= this.length; i++){
@@ -292,6 +337,8 @@ function init(length,pathLength,color){
     menu.style.display = "none";
     scoreP = 0;
     score.textContent = scoreP;
+
+    backgroundMusic.play(); //Musica de fondo
 }
 
 // Función para obtener un color aleatorio
