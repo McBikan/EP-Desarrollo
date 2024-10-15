@@ -47,6 +47,7 @@ class Apple{
         );
 
         if(distance < snake.radio+this.radio){
+            // Cambiar posición de la manzana
            this.position = {
                 x: Math.floor(Math.random() *
                      ((canvas.width-this.radio) - this.radio + 1)) + this.radio,
@@ -56,6 +57,9 @@ class Apple{
            snake.createBody();
            scoreP++;
            score.textContent = scoreP;
+           // Cambiar el color de los pequeños rectángulos
+           rectangleColor = getRandomColor(); // Función para obtener un color aleatorio o predefinido
+           console.log('Nuevo color de fondo:', rectangleColor); // Verificar si cambia el color
         }
     }
 }
@@ -287,12 +291,26 @@ function init(length,pathLength,color){
     scoreP = 0;
     score.textContent = scoreP;
 }
+
+// Función para obtener un color aleatorio
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
+
+let rectangleColor = "#23253C";  // Color inicial de los rectángulos
+
 function background(){
     ctx.fillStyle = "#1B1C30"
     ctx.fillRect(0,0,canvas.width,canvas.height);
     for(let i=0; i<canvas.height; i+=80){
         for(let j=0; j<canvas.width; j+=80){
-            ctx.fillStyle = "#23253C";
+            ctx.fillStyle = rectangleColor;
             ctx.fillRect(j+10,i+10,70,70);
         }
     }
