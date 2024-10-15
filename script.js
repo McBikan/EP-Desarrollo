@@ -59,6 +59,8 @@ class Apple{
            score.textContent = scoreP;
            // Cambiar el color de los pequeños rectángulos
            rectangleColor = getRandomColor(); // Función para obtener un color aleatorio o predefinido
+           // Aumentar la velocidad de la serpiente
+           snake.velocity += 0.1;  // Incrementa la velocidad un poco cada vez que coma una manzana
            console.log('Nuevo color de fondo:', rectangleColor); // Verificar si cambia el color
         }
     }
