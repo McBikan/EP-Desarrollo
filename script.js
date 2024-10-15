@@ -62,7 +62,7 @@ class Apple{
            // Cambiar el color de los pequeños rectángulos
            rectangleColor = getRandomColor(); // Función para obtener un color aleatorio o predefinido
            // Aumentar la velocidad de la serpiente
-           snake.velocity += 0.1;  // Incrementa la velocidad un poco cada vez que coma una manzana
+           snake.velocity += 2;  // Incrementa la velocidad un poco cada vez que coma una manzana
            console.log('Nuevo color de fondo:', rectangleColor); // Verificar si cambia el color
         }
     }
@@ -306,6 +306,52 @@ class Snake {
     }
 }
 
+class Potion {
+    constructor(position, radio, color, context) {
+        this.position = position;
+        this.radio = radio;
+        this.color = color;
+        this.context = context;
+    }
+    
+    draw() {
+        this.context.save();
+        this.context.beginPath();
+        this.context.arc(this.position.x, this.position.y, this.radio, 0, 2 * Math.PI);
+        this.context.fillStyle = this.color;
+        this.context.shadowColor = this.color;
+        this.context.shadowBlur = 10;
+        this.context.fill();
+        this.context.closePath();
+        this.context.restore();
+    }
+
+    collision(snake) {
+        let v1 = {
+            x: this.position.x - snake.position.x,
+            y: this.position.y - snake.position.y
+        };
+        let distance = Math.sqrt(
+            (v1.x * v1.x) + (v1.y * v1.y)
+        );
+
+        if (distance < snake.radio + this.radio) {
+            // Reducir el tamaño de la serpiente
+            if (snake.body.length > 0) {
+                snake.body.pop(); // Elimina el último segmento de la serpiente
+            }
+
+            // Cambiar posición de la poción
+            this.position = {
+                x: Math.floor(Math.random() * ((canvas.width - this.radio) - this.radio + 1)) + this.radio,
+                y: Math.floor(Math.random() * ((canvas.height - this.radio) - this.radio + 1)) + this.radio,
+            };
+        }
+    }
+}
+
+
+
 const snake = new Snake({x:200,y:200},11,"#FEBA39",1.5,3,12,ctx);
 snake.initBody();
 const snakeP1 = new Snake({x:165,y:40},11,"#FEBA39",1.5,8,12,ctx2);
@@ -315,6 +361,8 @@ const snakeP2 = new Snake({x:165,y:40},11,"#88FC03",1.5,8,12,ctx3);
 snakeP2.initBody();
 snakeP2.drawCharacter();
 const apple = new Apple({x:300,y:300},8,"red",ctx);
+const potion = new Potion({x: 150, y: 150}, 8, "purple", ctx); // Color y posición iniciales
+
 
 canvas2.addEventListener("click",()=>{
     init(3,12,"#FEBA39");
@@ -371,6 +419,8 @@ function update(){
         snake.update();
         apple.draw();
         apple.collision(snake);
+        potion.draw(); // Dibuja la poción
+        potion.collision(snake); // Verifica la colisión con la serpiente
     }
     requestAnimationFrame(update);
 }
