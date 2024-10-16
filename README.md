@@ -24,7 +24,7 @@
 | 2      | Implementación de la lógica de juego                                                                | P0            | 3                      | Sprint 1     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/2) |
 
 
-## Intefaz del juego:
+### Intefaz del juego:
 Contamos con el archivo index.html el cuál crea contenedores donde ocurrirá el juego, se mostrará el puntaje, tiempo y menú:
 ```html
 <body>
@@ -45,10 +45,26 @@ Contamos con el archivo index.html el cuál crea contenedores donde ocurrirá el
 ```
 en el style.css le damos una mejora a la interfaz a nivel visual.
 
-## Implementación de la lógica de juego:
+### Implementación de la lógica de juego:
 Tenemos 3 class y 2 funciones para aplicar la lógica del juego:
 - class Apple
 - class SnakeBody
 - class Snake
 - function init
 - function update
+
+
+## Sprint 2:
+
+| **ID** | **Historia de Usuario / Tarea**                                                                    | **Prioridad** | **Puntos de Historia** | **Sprint**   | **Enlace**                                             |
+|--------|----------------------------------------------------------------------------------------------------|---------------|------------------------|--------------|-------------------------------------------------------|
+| 3      | Creación de un segundo snake                                                                         | P0            | 7                      | Sprint 2     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/3) |
+| 4      | Implementación del despliegue de docker containers para la app de juego                             | P0            | 2                      | Sprint 2     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/4) |
+| 9      | Implementación 1er power up (Poción: eliminación de 1 cuerpo)                                       | P2            | 3                      | Sprint 2     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/10) |
+
+### Implementación del despliegue de docker containers para la app de juego:
+
+
+
+
+
