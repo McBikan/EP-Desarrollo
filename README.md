@@ -126,3 +126,27 @@ class Potion {
 
 luego esto hará un cambio en update():
 
+```javascript
+function update() {
+    background();
+    if (play) {
+        snake.update();
+        apple.draw();
+        apple.collision(snake);
+
+        // Actualiza el tiempo
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo en segundos
+        document.querySelector(".time").textContent = elapsedTime; // Actualiza el tiempo en la pantalla
+
+        // Dibujar y comprobar colisión de la poción solo si es visible
+        if (potionVisible) {
+            potion.draw();
+            potion.collision(snake);
+        }
+        
+    }
+    requestAnimationFrame(update);
+}
+update();
+```
+
