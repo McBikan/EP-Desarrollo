@@ -457,7 +457,7 @@ function getRandomColor() {
   }
   
 
-let rectangleColor = "#23253C";  // Color inicial de los rectángulos
+let rectangleColor = "#0e2d45";  // Color inicial de los rectángulos
 
 function background(){
     ctx.fillStyle = "#1B1C30"
