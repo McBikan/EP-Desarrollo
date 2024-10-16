@@ -63,8 +63,90 @@ Tenemos 3 class y 2 funciones para aplicar la lógica del juego:
 | 9      | Implementación 1er power up (Poción: eliminación de 1 cuerpo)                                       | P2            | 3                      | Sprint 2     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/10) |
 
 ### Implementación del despliegue de docker containers para la app de juego:
+![Texto alternativo](imagenes/docker/imagen1.jpg)
+![Texto alternativo](imagenes/docker/imagen2.jpg)
+![Texto alternativo](imagenes/docker/imagen3.jpg)
+![Texto alternativo](imagenes/docker/imagen4.jpg)
+
+### Implementación 1er power up (Poción: eliminación de 1 cuerpo)  
+Creamos una class potion con la lógica del power up:
 
 
+```javascript
+// Mueve la variable potionVisible fuera de la clase Potion
+let potionVisible = false;  // Ahora es una variable global
 
+class Potion {
+    constructor(position, radio, color, context) {
+        this.position = position;
+        this.radio = radio;
+        this.color = color;
+        this.context = context;
+    }
+    
+    draw() {
+        this.context.save();
+        this.context.beginPath();
+        this.context.arc(this.position.x, this.position.y, this.radio, 0, 2 * Math.PI);
+        this.context.fillStyle = this.color;
+        this.context.shadowColor = this.color;
+        this.context.shadowBlur = 10;
+        this.context.fill();
+        this.context.closePath();
+        this.context.restore();
+    }
 
+    collision(snake) {
+        let v1 = {
+            x: this.position.x - snake.position.x,
+            y: this.position.y - snake.position.y
+        };
+        let distance = Math.sqrt(
+            (v1.x * v1.x) + (v1.y * v1.y)
+        );
+
+        if (distance < snake.radio + this.radio) {
+            // Reducir el tamaño de la serpiente
+            if (snake.body.length > 0) {
+                snake.body.pop(); // Elimina el último segmento de la serpiente
+            }
+            
+            // Ocultar la poción hasta que se coman otras 5 manzanas
+            potionVisible = false;
+            
+            // Cambiar posición de la poción
+            this.position = {
+                x: Math.floor(Math.random() * ((canvas.width - this.radio) - this.radio + 1)) + this.radio,
+                y: Math.floor(Math.random() * ((canvas.height - this.radio) - this.radio + 1)) + this.radio,
+            };
+        }
+    }
+}
+```
+
+luego esto hará un cambio en update():
+
+```javascript
+function update() {
+    background();
+    if (play) {
+        snake.update();
+        apple.draw();
+        apple.collision(snake);
+
+        // Actualiza el tiempo
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo en segundos
+        document.querySelector(".time").textContent = elapsedTime; // Actualiza el tiempo en la pantalla
+
+        // Dibujar y comprobar colisión de la poción solo si es visible
+        if (potionVisible) {
+            potion.draw();
+            potion.collision(snake);
+        }
+        
+    }
+    requestAnimationFrame(update);
+}
+update();
+```
 
