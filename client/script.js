@@ -25,6 +25,8 @@ let scoreP = 0; // Inicializa el puntaje
 
 let startTime; // Variable para almacenar el tiempo de inicio
 
+let scoreSaved = false; // Variable global para guardar el estado del puntaje
+
 function saveScore(username, scoreP, time) {
     const scoreData = {
         username: username,
@@ -314,6 +316,8 @@ class Snake {
             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
             const username = prompt("Ingresa tu nombre de usuario:") || "Invitado"; // Pide al usuario que ingrese su nombre
 
+            console.log(`Guardando puntaje para ${username} con puntaje: ${scoreP} y tiempo: ${elapsedTime}`); 
+    
             // Llamar a la función saveScore
             saveScore(username, scoreP, elapsedTime); // Asumiendo que modificas saveScore para aceptar el puntaje y el tiempo
             this.scoreSaved = true; // Marca que el puntaje ya fue guardado
@@ -434,7 +438,7 @@ function init(length,pathLength,color){
     menu.style.display = "none"; // Oculta el menú de inicio
     scoreP = 0; // Reinicia el puntaje
     score.textContent = scoreP;
-    this.scoreSaved = false;
+    scoreSaved = false; // Reinicia el estado del puntaje guardado
     
     startTime = Date.now(); // Establecer el tiempo de inicio
 
