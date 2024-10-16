@@ -169,14 +169,16 @@ Hemos aplicado cucumber para hacer las pruebas de comportamiento
 ![Texto alternativo](imagenes/bdd/imagen3.jpg)
 ![Texto alternativo](imagenes/bdd/imagen4.jpg)
 
-Implementamos 3 escenarios y 12 pasos
+Implementamos 3 escenarios y 12 pasos.
 
 
 ## Conclusiones:
 El juego al final se verá así:
+
 ![Texto alternativo](imagenes/juego/imagen1.jpg)
 
-Hemos desarrollado charts para comprender el desarrollo del juego:
+Hemos desarrollado charts para comprender el desarrollo del juego.
+
 ![Texto alternativo](imagenes/chart/imagen1.jpg)
 ![Texto alternativo](imagenes/chart/imagen2.jpg)
 ![Texto alternativo](imagenes/chart/imagen3.jpg)
