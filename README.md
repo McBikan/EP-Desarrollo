@@ -63,7 +63,7 @@ Tenemos 3 class y 2 funciones para aplicar la lógica del juego:
 | 9      | Implementación 1er power up (Poción: eliminación de 1 cuerpo)                                       | P2            | 3                      | Sprint 2     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/10) |
 
 ### Implementación del despliegue de docker containers para la app de juego:
-
+![Texto alternativo](imagenes/docker/imagen1.jpg)
 
 
 
