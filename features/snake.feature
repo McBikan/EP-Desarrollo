@@ -5,5 +5,15 @@ Feature: Incrementar puntaje al comer manzanas
     And que la serpiente está cerca de una manzana
     When la serpiente se mueve y come la manzana
     Then el puntaje debe incrementarse en 1
-    And la velocidad de la serpiente debe aumentar
-    And el color de fondo debe cambiar
+
+  Scenario: La velocidad de la serpiente aumenta al comer una manzana
+    Given que el juego ha iniciado
+    And que la serpiente está cerca de una manzana
+    When la serpiente se mueve y come la manzana
+    Then la velocidad de la serpiente debe aumentar
+
+  Scenario: El color de fondo cambia al comer una manzana
+    Given que el juego ha iniciado
+    And que la serpiente está cerca de una manzana
+    When la serpiente se mueve y come la manzana
+    Then el color de fondo debe cambiar
