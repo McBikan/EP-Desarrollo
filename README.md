@@ -150,3 +150,43 @@ function update() {
 update();
 ```
 
+
+## Sprint 3:
+
+| **ID** | **Historia de Usuario / Tarea**                                                                    | **Prioridad** | **Puntos de Historia** | **Sprint**   | **Enlace**                                             |
+|--------|----------------------------------------------------------------------------------------------------|---------------|------------------------|--------------|-------------------------------------------------------|
+| 5      | Implementar la monitorización con prometheus y grafana                                             | P1            | 5                      | Sprint 3     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/5) |
+| 6      | Implementar la BD para guardar los registros de juego                                               | P1            | 4                      | Sprint 3     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/6) |
+| 7      | Implementar el juego multijugador (2 players)                                                      | P0            | 5                      | Sprint 3     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/7) |
+| 8      | Crear un ranking de los mejores puntajes                                                            | P2            | 5                      | Sprint 3     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/9) |
+| 10     | Implementación de las pruebas BDD con cucumber                                                      | P1            | 3                      | Sprint 3     | [Ver Tarea](https://github.com/McBikan/EP-Desarrollo/issues/11) |
+
+### Implementación de las Pruebas BDD(Behavior-Driven Development)(Desarrollo Guiado por Comportamiento) con cucumber:
+Hemos aplicado cucumber para hacer las pruebas de comportamiento
+
+![Texto alternativo](imagenes/bdd/imagen1.jpg)
+![Texto alternativo](imagenes/bdd/imagen2.jpg)
+![Texto alternativo](imagenes/bdd/imagen3.jpg)
+![Texto alternativo](imagenes/bdd/imagen4.jpg)
+
+Implementamos 3 escenarios y 12 pasos
+
+
+## Conclusiones:
+El juego al final se verá así:
+![Texto alternativo](imagenes/juego/imagen1.jpg)
+
+Hemos desarrollado charts para comprender el desarrollo del juego:
+![Texto alternativo](imagenes/chart/imagen1.jpg)
+![Texto alternativo](imagenes/chart/imagen2.jpg)
+![Texto alternativo](imagenes/chart/imagen3.jpg)
+
+
+
+
+
+
+
+
+
+
