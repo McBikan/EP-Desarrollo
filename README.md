@@ -122,6 +122,7 @@ class Potion {
         }
     }
 }
+```
 
 luego esto hará un cambio en update():
 
