@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'snake'
+    static_configs:
+      - targets: ['app:3000'] # Asegúrate de que este sea el nombre del servicio en docker-compose
