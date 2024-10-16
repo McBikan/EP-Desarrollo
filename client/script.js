@@ -32,7 +32,7 @@ function saveScore(username, scoreP, time) {
         time: time
     };
 
-    fetch('/save-score', {
+    fetch('/api/save-score',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -309,12 +309,15 @@ class Snake {
         backgroundMusic.pause();
         backgroundMusic.currentTime = 0;  // Reiniciar la música
 
-         // Guardar el puntaje y tiempo al final del juego
-        const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-        const username = "Ingrese su nombre de usuario:"; // Puedes pedir el nombre de usuario
+        // Guardar el puntaje y tiempo al final del juego
+        if (!this.scoreSaved) { // Solo guarda el puntaje si no se ha guardado antes
+            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            const username = prompt("Ingresa tu nombre de usuario:") || "Invitado"; // Pide al usuario que ingrese su nombre
 
-        // Llamar a la función saveScore
-        saveScore(username, scoreP, elapsedTime); // Asumiendo que modificas saveScore para aceptar el puntaje y el tiempo
+            // Llamar a la función saveScore
+            saveScore(username, scoreP, elapsedTime); // Asumiendo que modificas saveScore para aceptar el puntaje y el tiempo
+            this.scoreSaved = true; // Marca que el puntaje ya fue guardado
+        }
     }
     drawCharacter(){
         for(let i= 1; i<= this.length; i++){
@@ -431,7 +434,8 @@ function init(length,pathLength,color){
     menu.style.display = "none"; // Oculta el menú de inicio
     scoreP = 0; // Reinicia el puntaje
     score.textContent = scoreP;
-
+    this.scoreSaved = false;
+    
     startTime = Date.now(); // Establecer el tiempo de inicio
 
 
