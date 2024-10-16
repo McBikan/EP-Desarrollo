@@ -26,7 +26,8 @@
 
 ## Intefaz del juego:
 Contamos con el archivo index.html el cuál crea contenedores donde ocurrirá el juego, se mostrará el puntaje, tiempo y menú:
-"<body>
+```html
+<body>
     <div class="container">
         <canvas id="canvas"></canvas>
         <span class="score">0</span>
@@ -39,7 +40,8 @@ Contamos con el archivo index.html el cuál crea contenedores donde ocurrirá el
             </div>
             <p>Selecciona un personaje</p>
         </div>
-    </div>"
+    </div>
+</body>
 
 en el style.css le damos una mejora a la interfaz a nivel visual.
 
