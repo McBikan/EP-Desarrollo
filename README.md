@@ -171,6 +171,10 @@ Hemos aplicado cucumber para hacer las pruebas de comportamiento
 
 Implementamos 3 escenarios y 12 pasos.
 
+### Implementación de la BD para guardar los registros del juego:
+![Texto alternativo](imagenes/mongodb/imagen1.jpg)
+
+
 
 ## Conclusiones:
 El juego al final se verá así:
