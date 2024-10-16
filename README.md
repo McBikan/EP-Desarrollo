@@ -42,7 +42,7 @@ Contamos con el archivo index.html el cuál crea contenedores donde ocurrirá el
         </div>
     </div>
 </body>
-
+```
 en el style.css le damos una mejora a la interfaz a nivel visual.
 
 ## Implementación de la lógica de juego:
